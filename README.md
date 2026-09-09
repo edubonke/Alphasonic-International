@@ -1,4 +1,4 @@
-# Alphasonic International one-page website — v3
+# Alphasonic International one-page website
 
 Static one-page site. Open `index.html` directly or deploy the folder to GitHub Pages/Netlify/Vercel.
 

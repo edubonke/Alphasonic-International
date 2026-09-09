@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://edubonke.github.io/Alphasonic-International/sitemap.xml
