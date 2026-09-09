@@ -66,8 +66,28 @@
   }
   </script>
 
+  <!-- Google Analytics 4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P7XPQTSGKJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    window.gtag = gtag;
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-P7XPQTSGKJ', {
+      allow_google_signals: false,
+      allow_ad_personalization_signals: false
+    });
+  </script>
+
   <script src="pricing-config.js" defer></script>
   <script src="script.js" defer></script>
+  <script src="analytics.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
