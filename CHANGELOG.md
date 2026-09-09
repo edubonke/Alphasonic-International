@@ -44,3 +44,9 @@ Testimonials, completed-project claims, registrations, licences, insurance, asso
 - Rebuilt the portfolio into an editorial layout with larger image fields, wider spacing, and logical project grouping.
 - Reduced visual density across services, portfolio, why-us, and contact sections.
 - Kept the supplied logo artwork, brand slogans, favicon, estimator logic, WhatsApp flow, and project photography unchanged.
+
+
+## V6 — Transparent favicon applied
+- Added the supplied transparent Alphasonic circular logo as the site favicon.
+- Exported favicon.ico, 16x16 PNG, 32x32 PNG, Apple touch icon, and Android icon sizes.
+- Updated `index.html` favicon links so the site uses the transparent icon on browser and device surfaces.
