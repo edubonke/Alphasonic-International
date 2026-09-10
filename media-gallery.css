@@ -167,3 +167,83 @@
     transition: none;
   }
 }
+
+
+/* === Primary navigation visual icons ===
+   Icons supplement the written labels; they never replace them.
+   aria-hidden keeps the decorative graphics out of screen-reader speech.
+*/
+.primary-nav > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.primary-nav .nav-icon {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  color: currentColor;
+}
+
+.primary-nav .nav-icon svg {
+  display: block;
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.primary-nav > a:not(.nav-cta) .nav-icon {
+  color: var(--brand-blue);
+}
+
+.primary-nav > a:not(.nav-cta):hover .nav-icon,
+.primary-nav > a:not(.nav-cta):focus-visible .nav-icon {
+  transform: scale(1.08);
+}
+
+.primary-nav .nav-cta .nav-icon {
+  color: var(--white);
+}
+
+@media (min-width: 1061px) {
+  .primary-nav {
+    gap: 18px;
+  }
+
+  .primary-nav > a {
+    white-space: nowrap;
+  }
+
+  .primary-nav .nav-cta {
+    gap: 8px;
+  }
+}
+
+@media (max-width: 1060px) {
+  .primary-nav > a {
+    gap: 11px;
+  }
+
+  .primary-nav .nav-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .primary-nav .nav-icon svg {
+    width: 21px;
+    height: 21px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .primary-nav .nav-icon {
+    transition: transform .18s ease;
+  }
+}
