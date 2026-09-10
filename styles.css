@@ -123,6 +123,104 @@ button, select { cursor: pointer; }
 .menu-toggle { display: none; border: 0; background: transparent; padding: 9px; }
 .menu-toggle span { display: block; width: 24px; height: 2px; margin: 5px 0; background: var(--navy-950); }
 
+/* Primary navigation visual language
+   Icons reinforce the written labels and remain decorative to assistive tech. */
+.primary-nav > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.primary-nav .nav-icon {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e3ebf4;
+  border-radius: 10px;
+  background: #f3f7fb;
+  color: var(--brand-blue);
+}
+
+.primary-nav .nav-icon svg {
+  display: block;
+  width: 21px;
+  height: 21px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.primary-nav > a:not(.nav-cta):hover .nav-icon,
+.primary-nav > a:not(.nav-cta):focus-visible .nav-icon {
+  background: #eaf3fc;
+  border-color: #cbddec;
+  transform: translateY(-1px) scale(1.025);
+}
+
+.primary-nav .nav-cta {
+  gap: 9px;
+}
+
+.primary-nav .nav-cta .nav-icon {
+  width: 30px;
+  height: 30px;
+  color: var(--white);
+  background: rgba(255,255,255,.11);
+  border-color: rgba(255,255,255,.18);
+}
+
+.primary-nav .nav-cta .nav-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media (min-width: 1181px) {
+  .primary-nav {
+    gap: 14px;
+  }
+
+  .primary-nav > a {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 1180px) {
+  .primary-nav > a {
+    gap: 12px;
+    min-height: 50px;
+  }
+
+  .primary-nav .nav-icon,
+  .primary-nav .nav-cta .nav-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .primary-nav .nav-icon svg,
+  .primary-nav .nav-cta .nav-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .primary-nav .nav-cta {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .primary-nav .nav-icon {
+    transition:
+      transform .18s ease,
+      background .18s ease,
+      border-color .18s ease;
+  }
+}
+
+
 .hero {
   padding-top: 110px;
   padding-bottom: 124px;
@@ -650,12 +748,13 @@ body.modal-open { overflow: hidden; }
   .footer-inner > :last-child { grid-column: 1 / -1; }
 }
 
-@media (max-width: 1060px) {
-  .topbar-inner { justify-content: center; flex-wrap: wrap; gap: 2px 12px; padding: 5px 0 7px; }
-  .topbar p { display: block; width: 100%; text-align: center; font-size: 9px; opacity: .82; }
-  .topbar-links { width: 100%; justify-content: center; }
-  .brand-copy strong { font-size: 16px; }
-  .menu-toggle { display: block; }
+/* Navigation changes earlier than the main page layout so the
+   header never becomes crowded at intermediate desktop widths. */
+@media (max-width: 1180px) {
+  .menu-toggle {
+    display: block;
+  }
+
   .primary-nav {
     position: absolute;
     left: 20px;
@@ -671,9 +770,26 @@ body.modal-open { overflow: hidden; }
     border: 1px solid var(--line);
     box-shadow: var(--shadow);
   }
-  .primary-nav.open { display: flex; }
-  .primary-nav a { padding: 10px 12px; }
-  .nav-cta { text-align: center; margin-top: 3px; }
+
+  .primary-nav.open {
+    display: flex;
+  }
+
+  .primary-nav a {
+    padding: 10px 12px;
+  }
+
+  .nav-cta {
+    text-align: center;
+    margin-top: 3px;
+  }
+}
+
+@media (max-width: 1060px) {
+  .topbar-inner { justify-content: center; flex-wrap: wrap; gap: 2px 12px; padding: 5px 0 7px; }
+  .topbar p { display: block; width: 100%; text-align: center; font-size: 9px; opacity: .82; }
+  .topbar-links { width: 100%; justify-content: center; }
+  .brand-copy strong { font-size: 16px; }
   .section { padding: 72px 0; }
   .section-heading { display: block; }
   .projects-heading { margin-bottom: 30px; }

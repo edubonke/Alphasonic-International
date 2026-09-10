@@ -435,7 +435,7 @@
 
   window.addEventListener('resize', () => {
     if (
-      window.innerWidth > 1060 &&
+      window.innerWidth > 1180 &&
       refs.primaryNav?.classList.contains('open')
     ) {
       setMenuState(false);
