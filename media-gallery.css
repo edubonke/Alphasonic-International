@@ -167,3 +167,118 @@
     transition: none;
   }
 }
+
+
+/* === Media evidence caption layout hardening ===
+   The core gallery button uses height:100% for older portfolio layouts.
+   These evidence cards include captions beneath the image, so their image
+   area must have its own explicit height instead of consuming the figure. */
+
+.media-evidence-grid,
+.bathroom-evidence-grid {
+  align-items: start;
+  grid-auto-rows: auto;
+}
+
+.media-evidence-card {
+  display: grid;
+  grid-template-rows: auto auto;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+  overflow: visible;
+}
+
+/* Override the global .project-image-button height:100% rule. */
+.media-evidence-card .project-image-button {
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 4 / 3;
+  align-self: start;
+}
+
+/* Landscape evidence */
+.media-evidence-card.media-wide .project-image-button {
+  aspect-ratio: 16 / 10;
+}
+
+/* Portrait evidence */
+.interior-evidence-grid
+  .media-portrait
+  .project-image-button,
+.bathroom-evidence-grid
+  .project-image-button {
+  aspect-ratio: 4 / 5;
+}
+
+/* Image fills only the reserved media area, never the caption area. */
+.media-evidence-card .project-image-button img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: none;
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+/* Give every caption its own visible panel. */
+.media-evidence-card figcaption {
+  position: relative;
+  z-index: 2;
+  display: block;
+  min-height: 58px;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+/* Stage description becomes visually distinct. */
+.media-evidence-card .media-stage {
+  display: block;
+  margin: 0 0 2px;
+  color: var(--brand-blue);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+/* Mobile: preserve each photograph's natural dimensions.
+   Captions remain completely separate underneath. */
+@media (max-width: 700px) {
+  .media-evidence-card {
+    gap: 8px;
+  }
+
+  .media-evidence-card .project-image-button,
+  .media-evidence-card.media-wide .project-image-button,
+  .interior-evidence-grid
+    .media-portrait
+    .project-image-button,
+  .bathroom-evidence-grid
+    .project-image-button {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: auto;
+  }
+
+  .media-evidence-card .project-image-button img {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+
+  .media-evidence-card figcaption {
+    min-height: 0;
+  }
+}
