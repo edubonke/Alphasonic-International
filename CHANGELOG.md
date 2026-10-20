@@ -1,4 +1,13 @@
-# Alphasonic International — v2 improvements
+# Alphasonic International — change log
+
+## 20 October 2026 — site assessment and quote request
+- Replaced the estimator, quantity calculations and pricing configuration with a site assessment and quote-request form.
+- Updated navigation, service shortcuts, page descriptions, WhatsApp message and analytics for the new request flow.
+- Preserved draft saving, accessible validation, review controls and existing project-gallery behavior.
+- Enabled muted inline autoplay and looping on both silent portfolio videos, with native controls retained.
+- Added verified Facebook and existing WhatsApp links to the footer.
+
+## v2 improvements
 
 - Preserved all supplied Alphasonic logo artwork and brand slogans unchanged.
 - Kept the supplied round brand artwork as the favicon.
