@@ -1,20 +1,28 @@
 const { chromium } = require('playwright');
 const assert = require('node:assert/strict');
-const { spawn } = require('node:child_process');
+const http = require('node:http');
 const fs = require('node:fs');
 const path = require('node:path');
-const base = 'http://127.0.0.1:4190/';
+let base;
 const root = path.resolve(__dirname, '..');
 const shots = path.join(root, 'qa-screenshots');
 fs.mkdirSync(shots, { recursive: true });
-const server = spawn('python3', ['-m','http.server','4190','--bind','127.0.0.1'], {cwd:root, stdio:'ignore'});
+const mime={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'application/javascript; charset=utf-8','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.jpeg':'image/jpeg','.mp4':'video/mp4','.ico':'image/x-icon','.svg':'image/svg+xml'};
+const server=http.createServer((req,res)=>{
+  const url=new URL(req.url,'http://127.0.0.1');
+  const file=path.resolve(root,'.'+(url.pathname==='/'?'/index.html':decodeURIComponent(url.pathname)));
+  if(!file.startsWith(root+path.sep)||!fs.existsSync(file)||!fs.statSync(file).isFile()) {res.writeHead(404);res.end();return;}
+  const size=fs.statSync(file).size;
+  const type=mime[path.extname(file)]||'application/octet-stream';
+  const range=/^bytes=(\d+)-(\d*)$/.exec(req.headers.range||'');
+  if(range){const start=Number(range[1]),end=range[2]?Math.min(Number(range[2]),size-1):size-1;if(start>=size||end<start){res.writeHead(416);res.end();return;}res.writeHead(206,{'Content-Type':type,'Content-Length':end-start+1,'Accept-Ranges':'bytes','Content-Range':`bytes ${start}-${end}/${size}`});fs.createReadStream(file,{start,end}).pipe(res);return;}
+  res.writeHead(200,{'Content-Type':type,'Content-Length':size,'Accept-Ranges':'bytes'});fs.createReadStream(file).pipe(res);
+});
 const routes = ['index','services','portfolio','quote'];
 async function ready() {
-  for (let i=0;i<60;i++) {
-    try { if ((await fetch(base)).ok) return; } catch {}
-    await new Promise(resolve=>setTimeout(resolve,250));
-  }
-  throw new Error('Local server did not start');
+  await new Promise((resolve,reject)=>{server.once('error',reject);server.listen(0,'127.0.0.1',resolve);});
+  base='http://127.0.0.1:'+server.address().port+'/';
+  console.log('Preview server listening:',base);
 }
 async function renderCheck(page,name,device) {
   await page.goto(base+name+'.html',{waitUntil:'domcontentloaded'});
@@ -121,5 +129,5 @@ async function renderCheck(page,name,device) {
     console.log('PASS mobile navigation, filter and image viewer');
     assert.deepEqual(errors,[]);
     console.log('PASS no application console errors');
-  } finally {await browser.close();server.kill();}
-})().catch(err=>{console.error(err);server.kill();process.exitCode=1});
+  } finally {await browser.close();server.close();}
+})().catch(err=>{console.error(err);server.close();process.exitCode=1});
