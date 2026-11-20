@@ -1,0 +1,7 @@
+{
+  "name": "alphasonic-international",
+  "private": true,
+  "scripts": {
+    "dev": "sh -c 'python3 -m http.server 4173 --bind 0.0.0.0' --"
+  }
+}

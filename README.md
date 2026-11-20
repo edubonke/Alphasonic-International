@@ -1,6 +1,14 @@
-# Alphasonic International one-page website
+# Alphasonic International
 
-Static one-page site. Open `index.html` directly or deploy the folder to GitHub Pages/Netlify/Vercel.
+Static multi-page site. Open `index.html` directly or serve the folder to preview it. No framework or backend is required. Hosted on GitHub Pages.
+
+## Architectural Precision redesign
+
+The four supplied Stitch screens are adapted into Home (`index.html`), Services (`services.html`), Selected Works (`portfolio.html`), and Site Assessment (`quote.html`). The redesigned layout uses the supplied navy and cobalt palette, Space Grotesk and Plus Jakarta Sans typography, responsive grids, working service and portfolio filters, and a four-step assessment form. The existing company logos, original portfolio photos and both video files remain unchanged. Representative images remain clearly identified as such on services pages only.
+
+No claims about unverified certifications, guarantees, prices or turnaround times from the concept screens are published. WhatsApp is the submission channel; the site does not represent a prepared request as a completed booking.
+
+For a local preview with Python installed, run `npm run dev` or `python3 -m http.server 4173` from the repository root.
 
 ## Brand protection
 The supplied Alphasonic round logo, banner/poster artwork, slogans and contact artwork are not altered. The favicon references the original round brand image.

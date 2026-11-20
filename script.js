@@ -34,7 +34,7 @@
   if (year) year.textContent = new Date().getFullYear();
 
   // Keep older shared estimator links pointing to the replacement form.
-  if (window.location.hash === '#estimator') {
+  if (window.location.hash === '#estimator' && document.getElementById('site-assessment')) {
     window.history.replaceState(null, '', '#site-assessment');
     document.getElementById('site-assessment')?.scrollIntoView({ block: 'start' });
   }
@@ -122,7 +122,9 @@
   };
 
   const move = direction => {
-    currentIndex = (currentIndex + direction + buttons.length) % buttons.length;
+    const available = buttons.map((button, index) => button.closest('[hidden]') ? -1 : index).filter(index => index >= 0);
+    if (!available.length) return;
+    currentIndex = available[(available.indexOf(currentIndex) + direction + available.length) % available.length];
     render();
   };
 
