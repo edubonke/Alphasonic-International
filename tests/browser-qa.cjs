@@ -130,7 +130,8 @@ async function renderCheck(page,name,device) {
     await page.goto(base+'quote.html');
     await page.getByRole('button',{name:'Apartment',exact:true}).click();
     await page.locator('#wizard-next').click();
-    await page.locator('#service').selectOption('plumbing');
+    await page.getByRole('button',{name:'Plumbing',exact:true}).click();
+    assert.equal(await page.locator('#service').inputValue(),'plumbing');
     await page.locator('#wizard-next').click();
     await page.locator('#location').fill('Test suburb');
     await page.locator('#details').fill('Synthetic mobile plumbing assessment');
