@@ -127,6 +127,24 @@ async function renderCheck(page,name,device) {
     await page.locator('#project-lightbox').waitFor({state:'visible'});
     await page.locator('.project-lightbox-close').click();
     console.log('PASS mobile navigation, filter and image viewer');
+    await page.goto(base+'quote.html');
+    await page.getByRole('button',{name:'Apartment',exact:true}).click();
+    await page.locator('#wizard-next').click();
+    await page.locator('#service').selectOption('plumbing');
+    await page.locator('#wizard-next').click();
+    await page.locator('#location').fill('Test suburb');
+    await page.locator('#details').fill('Synthetic mobile plumbing assessment');
+    await page.locator('#wizard-next').click();
+    await page.locator('#customer-name').fill('Test User');
+    await page.locator('#customer-phone').fill('071 234 5678');
+    await page.locator('#send-whatsapp').click();
+    await page.locator('#quote-modal').waitFor({state:'visible'});
+    const mobileHref=await page.locator('#whatsapp-link').getAttribute('href');
+    assert.match(decodeURIComponent(mobileHref),/Synthetic mobile plumbing assessment/);
+    await page.screenshot({path:path.join(shots,'mobile-quote-review.png')});
+    await page.locator('.modal-close').click();
+    await page.locator('#clear-request').click();
+    console.log('PASS mobile quote wizard and review');
     assert.deepEqual(errors,[]);
     console.log('PASS no application console errors');
   } finally {await browser.close();server.close();}
