@@ -51,7 +51,7 @@
       const link = event.target instanceof Element ? event.target.closest('a[href]') : null;
       if (!link) return;
       const href = link.getAttribute('href') || '';
-      if (href === '#site-assessment') track('assessment_cta_clicked');
+      if (href === '#site-assessment' || href.startsWith('quote.html')) track('assessment_cta_clicked');
       else if (href.startsWith('https://wa.me/') && link.id !== 'whatsapp-link') track('whatsapp_direct_clicked');
       else if (href.startsWith('tel:')) track('phone_clicked');
       else if (href.startsWith('mailto:')) track('email_clicked');

@@ -2,6 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://edubonke.github.io/Alphasonic-International/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-11-20</lastmod>
   </url>
+  <url><loc>https://edubonke.github.io/Alphasonic-International/services.html</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://edubonke.github.io/Alphasonic-International/portfolio.html</loc><lastmod>2026-11-20</lastmod></url>
+  <url><loc>https://edubonke.github.io/Alphasonic-International/quote.html</loc><lastmod>2026-11-20</lastmod></url>
 </urlset>
