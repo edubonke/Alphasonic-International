@@ -66,10 +66,10 @@ async function renderCheck(page,name,device) {
     assert.equal(await page.locator('#service').inputValue(),'electrical');
     console.log('PASS service filters and quote prefill');
     await page.locator('#wizard-next').click();
-    assert.match(await page.locator('#wizard-label').innerText(),/Step 1/);
+    assert.match(await page.locator('#wizard-label').innerText(),/Step 1/i);
     await page.getByRole('button',{name:'House / Townhouse',exact:true}).click();
     await page.locator('#wizard-next').click();
-    assert.match(await page.locator('#wizard-label').innerText(),/Step 2/);
+    assert.match(await page.locator('#wizard-label').innerText(),/Step 2/i);
     await page.locator('#wizard-next').click();
     await page.locator('#location').fill('Test suburb');
     await page.locator('#details').fill('Synthetic electrical assessment test');
@@ -88,7 +88,7 @@ async function renderCheck(page,name,device) {
     await page.screenshot({path:path.join(shots,'desktop-quote-review.png')});
     await page.locator('.modal-close').click();
     await page.locator('#clear-request').click();
-    assert.match(await page.locator('#wizard-label').innerText(),/Step 1/);
+    assert.match(await page.locator('#wizard-label').innerText(),/Step 1/i);
     console.log('PASS quote wizard required fields, phone validation, summary, WhatsApp handoff and clear');
     await page.goto(base+'portfolio.html');
     assert.equal(await page.locator('.project-image-button').count(),20);
